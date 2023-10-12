@@ -30,6 +30,12 @@ def add_fitness(dpg):
           with (dpg.group(horizontal=True)):
             dpg.add_text(fit_justified_strs["Pulse Weight: "])
             dpg.add_slider_float(min_value=0, max_value=5.0, clamped=True)
+      elif fitness_function == "Pulse":
+        with dpg.group(tag="fit_fn_param",
+                        before="fit_fn_param_anchor"):
+          dpg.add_text(fit_justified_strs["Oscillator Frequency: "])
+          dpg.add_input_int(min_value=1, min_clamped=True, max_value=1000000,
+                            max_clamped=True, default_value=1000)
 
     dpg.add_text("Fitness Function:")
     dpg.add_radio_button(["Variance", "Pulse", "Combined"],
@@ -37,8 +43,3 @@ def add_fitness(dpg):
                           horizontal=True)
 
     dpg.add_separator(tag="fit_fn_param_anchor")
-
-    with dpg.group(horizontal=True):
-      dpg.add_text(fit_justified_strs["Oscillator Frequency: "])
-      dpg.add_input_int(min_value=1, min_clamped=True, max_value=1000000,
-                        max_clamped=True, default_value=1000)
