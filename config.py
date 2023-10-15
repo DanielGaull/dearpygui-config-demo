@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 
 import dearpygui.dearpygui as dpg
-from sections.fitness import add_fitness
-from sections.ga import add_ga
-from sections.hardware import add_hardware
-from sections.init import add_init
-from sections.logging import add_logging
-from sections.system import add_system
-from sections.toplevel import add_top_level
+from config_sections.fitness import add_fitness
+from config_sections.ga import add_ga
+from config_sections.hardware import add_hardware
+from config_sections.init import add_init
+from config_sections.logging import add_logging
+from config_sections.system import add_system
+from config_sections.toplevel import add_top_level
 
 # Creat context before we do any with DearPyGui. Depending on the the action,
 # we may segfault if the context doesn't exist.
