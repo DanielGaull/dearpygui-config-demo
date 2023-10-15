@@ -1,7 +1,7 @@
 from utilities import justify_str_group
 
 def add_ga(dpg):
-    def enable_state_on_toggle(dpg, _, enabled, item):
+    def enable_state_on_toggle(_, enabled, item):
         if enabled:
             dpg.show_item(item)
         else:

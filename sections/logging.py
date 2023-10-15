@@ -1,12 +1,12 @@
 from utilities import justify_str_group
 
 def add_logging(dpg):
-    def select_one_file(dpg, _, file_selection_data, write_loc):
+    def select_one_file(_, file_selection_data, write_loc):
         selected_files = list(file_selection_data["selections"].values())
         if len(selected_files) == 0:
             return
         dpg.set_value(write_loc, selected_files[0])
-    def enable_state_on_toggle(dpg, _, enabled, item):
+    def enable_state_on_toggle(_, enabled, item):
         if enabled:
             dpg.show_item(item)
         else:
