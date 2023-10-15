@@ -8,6 +8,7 @@ from config_sections.init import add_init
 from config_sections.logging import add_logging
 from config_sections.system import add_system
 from config_sections.toplevel import add_top_level
+from top_bar import add_top_bar
 
 # Creat context before we do any with DearPyGui. Depending on the the action,
 # we may segfault if the context doesn't exist.
@@ -32,14 +33,18 @@ dpg.create_viewport(title="Config Editor", width=1000, height=700)#,
                     #min_height=700)
 
 with dpg.window(label="", width=1000, height=700, no_resize=True, no_move=True,
-                no_collapse=True, no_title_bar=True):
-  add_top_level(dpg)
-  add_fitness(dpg)
-  add_ga(dpg)
-  add_init(dpg)
-  add_logging(dpg)
-  add_system(dpg)
-  add_hardware(dpg)
+                no_collapse=True, no_title_bar=False): # The title bar makes this ugly, but only way to get the menu to show for now
+
+  add_top_bar(dpg)
+
+  with dpg.child_window():
+    add_top_level(dpg, {})
+    add_fitness(dpg, {})
+    add_ga(dpg, {})
+    add_init(dpg, {})
+    add_logging(dpg, {})
+    add_system(dpg, {})
+    add_hardware(dpg, {})
 
 dpg.setup_dearpygui()
 dpg.show_viewport()
