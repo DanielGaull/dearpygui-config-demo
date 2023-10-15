@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import dearpygui.dearpygui as dpg
+import dearpygui.dearpygui as dpg # type: ignore
 from config_sections.FitnessSection import FitnessSection
 from config_sections.GaSection import GaSection
 from config_sections.HardwareSection import HardwareSection

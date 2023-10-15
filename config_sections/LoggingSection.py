@@ -2,11 +2,14 @@ from utilities import justify_str_group
 
 class LoggingSection:
     def __init__(self, dpg):
+        self.__dpg = dpg
+
         def select_one_file(_, file_selection_data, write_loc):
             selected_files = list(file_selection_data["selections"].values())
             if len(selected_files) == 0:
                 return
             dpg.set_value(write_loc, selected_files[0])
+
         def enable_state_on_toggle(_, enabled, item):
             if enabled:
                 dpg.show_item(item)
@@ -25,12 +28,12 @@ class LoggingSection:
 
             with dpg.group(horizontal=True):
                 dpg.add_text(outp_justified_strs["Log level: "])
-                dpg.add_slider_int(min_value=0, max_value=4, default_value=0)
+                dpg.add_slider_int('log_level', min_value=0, max_value=4, default_value=0)
 
             dpg.add_separator()
 
             with dpg.group(horizontal=True):
-                dpg.add_checkbox(label=outp_justified_strs["Log to file: "],
+                dpg.add_checkbox('save_log', label=outp_justified_strs["Log to file: "],
                                     default_value=True)
                 dpg.add_input_text(readonly=True, tag="log_file_display",
                                     user_data="log_file_selector")
@@ -48,7 +51,7 @@ class LoggingSection:
                 dpg.add_file_extension(".*")
 
             with dpg.group(horizontal=True):
-                dpg.add_checkbox(label=outp_justified_strs["Save plots to: "], 
+                dpg.add_checkbox('save_plots', label=outp_justified_strs["Save plots to: "], 
                                     callback=enable_state_on_toggle,
                                     user_data="plot_file_display", default_value=True)
                 dpg.add_input_text(readonly=True, tag="plot_file_display",
@@ -78,3 +81,18 @@ class LoggingSection:
                                         user_data=f"{item} display",
                                         callback=select_one_file):
                         dpg.add_file_extension(".*")
+
+    def get_values(self):
+        return {
+            'log_file': self.__dpg.get_value('log_file_display'),
+            'plots_dir': self.__dpg.get_value('plot_file_display'),
+            'log_level': self.__dpg.get_value('log_level'),
+            'save_log': self.__dpg.get_value('save_log'),
+            'save_plots': self.__dpg.get_value('save_plots'),
+
+            'output_dir': self.__dpg.get_value('Save Output to: display'),
+            'asc_dir': self.__dpg.get_value('Save .asc files to: display'),
+            'bin_dir': self.__dpg.get_value('Save .bin files to: display'),
+            'data_dir': self.__dpg.get_value('Save MCU data to: display'),
+            'analysis': self.__dpg.get_value('Analysis directory: display'),
+        }

@@ -1,6 +1,8 @@
 
 class InitSection:
     def __init__(self, dpg):
+        self.__dpg = dpg
+
         def select_one_file(_, file_selection_data, write_loc):
             selected_files = list(file_selection_data["selections"].values())
             if len(selected_files) == 0:
@@ -19,7 +21,7 @@ class InitSection:
                     with dpg.group(horizontal=True, tag="randomize_params",
                                     before="randomize_params_anchor"):
                         dpg.add_text("Randomize: ")
-                        dpg.add_combo(["until pulse threshold", "until variance threshold",
+                        dpg.add_combo('randomize_until', ["until pulse threshold", "until variance threshold",
                                         "once"], default_value="once")
                 elif init_mode == "Use existing population":
                     with dpg.group(horizontal=True, tag="existing_pop_params",
@@ -37,13 +39,20 @@ class InitSection:
 
             with dpg.group():
                 dpg.add_text("Initialization Mode:")
-                dpg.add_radio_button(["Clone from seed", "Clone from seed and mutate",
+                dpg.add_radio_button('init_mode', ["Clone from seed", "Clone from seed and mutate",
                                         "Randomize", "Use existing population"],
                                         callback=cb_handle_init_mode_change,
                                         default_value="Randomize")
 
             with dpg.group(horizontal=True, tag="randomize_params"):
                 dpg.add_text("Randomize: ")
-                dpg.add_combo(["until pulse threshold", "until variance threshold",
+                dpg.add_combo('randomize_until', ["until pulse threshold", "until variance threshold",
                                 "once"], default_value="once")
                 dpg.add_spacer(tag="randomize_params_anchor")
+
+    def get_values(self):
+        return {
+            'src_populations_dir': self.__dpg.get_value('Populations Source: display'),
+            'init_mode': self.__dpg.get_value('init_mode'),
+            'randomize_until': self.__dpg.get_value('randomize_until'),
+        }

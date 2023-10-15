@@ -1,6 +1,8 @@
 
 class SystemSection:
     def __init__(self, dpg):
+        self.__dpg = dpg
+
         def select_one_file(_, file_selection_data, write_loc):
             selected_files = list(file_selection_data["selections"].values())
             if len(selected_files) == 0:
@@ -25,3 +27,8 @@ class SystemSection:
                                         callback=select_one_file,
                                         user_data="device_file_display"):
                     dpg.add_file_extension(".*")
+
+    def get_values(self):
+        return {
+            'usb_path': self.__dpg.get_value('device_file_display')
+        }

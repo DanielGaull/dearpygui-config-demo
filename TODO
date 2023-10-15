@@ -4,3 +4,7 @@
 
 * Opening config files
 * Saving config files
+  - Convert text values to the desired ones for the config file
+
+* Missing random injection
+* Redo randomization schema
