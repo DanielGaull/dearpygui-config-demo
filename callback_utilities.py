@@ -1,3 +1,5 @@
+# Currently unused, callbacks are individually defined in each file that they're needed
+
 # A callback function called that enables/disables the given item when the
 # toggle state of the sender changes. Usually used for checkboxes.
 def cb_handle_enable_state_on_toggle(dpg, _, enabled, item):

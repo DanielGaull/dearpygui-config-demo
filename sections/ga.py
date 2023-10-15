@@ -1,9 +1,11 @@
-from functools import partial
 from utilities import justify_str_group
-from callback_utilities import cb_handle_enable_state_on_toggle
 
 def add_ga(dpg):
-    enable_state_on_toggle = partial(cb_handle_enable_state_on_toggle, dpg)
+    def enable_state_on_toggle(dpg, _, enabled, item):
+        if enabled:
+            dpg.show_item(item)
+        else:
+            dpg.hide_item(item)
 
     ### Section for configuring genetic algorithm parameters ###
     with dpg.collapsing_header(label="Genetic Algorithm"):

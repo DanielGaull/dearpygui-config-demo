@@ -1,8 +1,10 @@
-from functools import partial
-from callback_utilities import cb_handle_select_one_file
 
 def add_system(dpg):
-    select_one_file = partial(cb_handle_select_one_file, dpg)
+    def select_one_file(dpg, _, file_selection_data, write_loc):
+        selected_files = list(file_selection_data["selections"].values())
+        if len(selected_files) == 0:
+            return
+        dpg.set_value(write_loc, selected_files[0])
 
     ## Section for configuring system parameters
     with dpg.collapsing_header(label="System"):

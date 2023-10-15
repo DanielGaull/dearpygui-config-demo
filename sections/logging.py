@@ -1,10 +1,16 @@
-from functools import partial
 from utilities import justify_str_group
-from callback_utilities import cb_handle_enable_state_on_toggle, cb_handle_select_one_file
 
 def add_logging(dpg):
-    select_one_file = partial(cb_handle_select_one_file, dpg)
-    enable_state_on_toggle = partial(cb_handle_enable_state_on_toggle, dpg)
+    def select_one_file(dpg, _, file_selection_data, write_loc):
+        selected_files = list(file_selection_data["selections"].values())
+        if len(selected_files) == 0:
+            return
+        dpg.set_value(write_loc, selected_files[0])
+    def enable_state_on_toggle(dpg, _, enabled, item):
+        if enabled:
+            dpg.show_item(item)
+        else:
+            dpg.hide_item(item)
 
     ### Section for configuring logging and output ###
     with dpg.collapsing_header(label="Logging and Output"):
