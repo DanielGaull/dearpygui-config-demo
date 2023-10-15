@@ -1,6 +1,6 @@
 from utilities import justify_str_group
 
-def add_logging(dpg):
+def add_logging(dpg, init_values):
     def select_one_file(_, file_selection_data, write_loc):
         selected_files = list(file_selection_data["selections"].values())
         if len(selected_files) == 0:

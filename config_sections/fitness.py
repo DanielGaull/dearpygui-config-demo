@@ -1,6 +1,6 @@
 from utilities import justify_str_group
 
-def add_fitness(dpg):
+def add_fitness(dpg, init_values):
     ### Section for configuring fitness function and its parameters ###
   with dpg.collapsing_header(label="Fitness"):
     fit_justified_strs = justify_str_group("Variance Weight: ",

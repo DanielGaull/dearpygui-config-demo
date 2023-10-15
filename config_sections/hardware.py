@@ -1,6 +1,6 @@
 from utilities import justify_str_group
 
-def add_hardware(dpg):
+def add_hardware(dpg, init_values):
     ## Section for configuring hardware parameters
     with dpg.collapsing_header(label="Hardware"):
         hw_justified_strs = justify_str_group("Baud rate: ", "MCU read timeout: ",
