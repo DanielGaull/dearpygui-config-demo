@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 
 import dearpygui.dearpygui as dpg
-from config_sections.fitness import add_fitness
-from config_sections.ga import add_ga
-from config_sections.hardware import add_hardware
-from config_sections.init import add_init
-from config_sections.logging import add_logging
-from config_sections.system import add_system
-from config_sections.toplevel import add_top_level
+from config_sections.FitnessSection import FitnessSection
+from config_sections.GaSection import GaSection
+from config_sections.HardwareSection import HardwareSection
+from config_sections.InitSection import InitSection
+from config_sections.LoggingSection import LoggingSection
+from config_sections.SystemSection import SystemSection
+from config_sections.TopLevelSection import TopLevelSection
 from top_bar import add_top_bar
 
 # Creat context before we do any with DearPyGui. Depending on the the action,
@@ -38,13 +38,13 @@ with dpg.window(label="", width=1000, height=700, no_resize=True, no_move=True,
   add_top_bar(dpg)
 
   with dpg.child_window():
-    add_top_level(dpg, {})
-    add_fitness(dpg, {})
-    add_ga(dpg, {})
-    add_init(dpg, {})
-    add_logging(dpg, {})
-    add_system(dpg, {})
-    add_hardware(dpg, {})
+    top_level_section = TopLevelSection(dpg)
+    fitness_section = FitnessSection(dpg)
+    ga_section = GaSection(dpg)
+    init_section = InitSection(dpg)
+    logging_section = LoggingSection(dpg)
+    system_section = SystemSection(dpg)
+    hardware_section = HardwareSection(dpg)
 
 dpg.setup_dearpygui()
 dpg.show_viewport()
