@@ -28,12 +28,12 @@ class LoggingSection:
 
             with dpg.group(horizontal=True):
                 dpg.add_text(outp_justified_strs["Log level: "])
-                dpg.add_slider_int('log_level', min_value=0, max_value=4, default_value=0)
+                dpg.add_slider_int(tag='log_level', min_value=0, max_value=4, default_value=0)
 
             dpg.add_separator()
 
             with dpg.group(horizontal=True):
-                dpg.add_checkbox('save_log', label=outp_justified_strs["Log to file: "],
+                dpg.add_checkbox(tag='save_log', label=outp_justified_strs["Log to file: "],
                                     default_value=True)
                 dpg.add_input_text(readonly=True, tag="log_file_display",
                                     user_data="log_file_selector")
@@ -51,7 +51,7 @@ class LoggingSection:
                 dpg.add_file_extension(".*")
 
             with dpg.group(horizontal=True):
-                dpg.add_checkbox('save_plots', label=outp_justified_strs["Save plots to: "], 
+                dpg.add_checkbox(tag='save_plots', label=outp_justified_strs["Save plots to: "], 
                                     callback=enable_state_on_toggle,
                                     user_data="plot_file_display", default_value=True)
                 dpg.add_input_text(readonly=True, tag="plot_file_display",

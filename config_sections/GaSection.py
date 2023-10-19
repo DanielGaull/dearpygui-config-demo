@@ -19,21 +19,21 @@ class GaSection:
 
             with dpg.group(horizontal=True):
                 dpg.add_text(ga_justified_strs["Population Size: "])
-                dpg.add_input_int('population_size', min_value=2, min_clamped=True, default_value=50)
+                dpg.add_input_int(tag='population_size', min_value=2, min_clamped=True, default_value=50)
 
             dpg.add_separator()
 
             with dpg.group(horizontal=True):
                 dpg.add_text(ga_justified_strs["Mutation Probability: "])
-                dpg.add_slider_float('mutation_probability', min_value=0, max_value=1.0, clamped=True)
+                dpg.add_slider_float(tag='mutation_probability', min_value=0, max_value=1.0, clamped=True)
 
             with dpg.group(horizontal=True):
                 dpg.add_text(ga_justified_strs["Crossover Probability: "])
-                dpg.add_slider_float('crossover_probability', min_value=0, max_value=1.0, clamped=True)
+                dpg.add_slider_float(tag='crossover_probability', min_value=0, max_value=1.0, clamped=True)
 
             with dpg.group(horizontal=True):
                 dpg.add_text(ga_justified_strs["Elitism Fraction: "])
-                dpg.add_slider_float('elitism_fraction', min_value=0, max_value=1.0, clamped=True)
+                dpg.add_slider_float(tag='elitism_fraction', min_value=0, max_value=1.0, clamped=True)
 
             dpg.add_separator()
 
@@ -44,14 +44,14 @@ class GaSection:
                 with dpg.table_row():
                     with dpg.table_cell():
                         dpg.add_text("Selection Type:")
-                        dpg.add_radio_button('selection', ["Single Elite", "Fractional Elite",
+                        dpg.add_radio_button(tag='selection', items=["Single Elite", "Fractional Elite",
                                                 "Classic Tournament",
                                                 "Fitness Proportional", "Rank Proportional", "MAP Elites"],
                                                 default_value="Fitness Proportional")
 
                     with dpg.table_cell():
                         dpg.add_text("Diversity Measure:")
-                        dpg.add_radio_button('diversity_measure', ["None", "Unique Individuals", "Hamming Distance"],
+                        dpg.add_radio_button(tag='diversity_measure', items=["None", "Unique Individuals", "Hamming Distance"],
                                                 default_value="Hamming Distance")
 
             dpg.add_separator()
@@ -60,19 +60,18 @@ class GaSection:
                                                 "Stop after reaching fitness value: ")
 
             with dpg.group(horizontal=True):
-                dpg.add_checkbox('has_gen_max', label=stp_justified_strs["Stop after generation: "],
+                dpg.add_checkbox(tag='has_gen_max', label=stp_justified_strs["Stop after generation: "],
                                     callback=enable_state_on_toggle,
                                     user_data="gen_max", default_value=True)
-                dpg.add_input_int('gen_max', min_value=2, min_clamped=True, default_value=500,
-                                    tag="gen_max")
+                dpg.add_input_int(tag='gen_max', min_value=2, min_clamped=True, default_value=500)
 
             with dpg.group(horizontal=True):
-                dpg.add_checkbox('has_fit_max', label=stp_justified_strs["Stop after reaching fitness value: "],
+                dpg.add_checkbox(tag='has_fit_max', label=stp_justified_strs["Stop after reaching fitness value: "],
                                     callback=enable_state_on_toggle,
                                     user_data="fitness_target")
-                dpg.add_input_int('fit_max', min_value=2, min_clamped=True, default_value=1000,
-                                    enabled=False, tag="fitness_target")
-                dpg.hide_item("fitness_target")
+                dpg.add_input_int(tag='fit_max', min_value=2, min_clamped=True, default_value=1000,
+                                    enabled=False)
+                dpg.hide_item("fit_max")
     
     def get_values(self):
         return {

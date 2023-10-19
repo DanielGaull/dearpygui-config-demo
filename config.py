@@ -9,6 +9,7 @@ from config_sections.LoggingSection import LoggingSection
 from config_sections.SystemSection import SystemSection
 from config_sections.TopLevelSection import TopLevelSection
 from top_bar import add_top_bar
+from configparser import ConfigParser
 
 # Creat context before we do any with DearPyGui. Depending on the the action,
 # we may segfault if the context doesn't exist.
@@ -26,6 +27,9 @@ with dpg.item_handler_registry(tag="show_item_on_click") as handler:
 
   dpg.add_item_clicked_handler(callback=cb_show_item_on_click)
 
+def on_save():
+  print('save clicked')
+
 ### Start creating GUI ###
 
 dpg.create_viewport(title="Config Editor", width=1000, height=700)#,
@@ -35,7 +39,8 @@ dpg.create_viewport(title="Config Editor", width=1000, height=700)#,
 with dpg.window(label="", width=1000, height=700, no_resize=True, no_move=True,
                 no_collapse=True, no_title_bar=False): # The title bar makes this ugly, but only way to get the menu to show for now
 
-  add_top_bar(dpg)
+  add_top_bar(dpg, 
+    {'save': on_save})
 
   with dpg.child_window():
     top_level_section = TopLevelSection(dpg)

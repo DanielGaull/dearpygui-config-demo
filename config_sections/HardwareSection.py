@@ -9,18 +9,18 @@ class HardwareSection:
                                                 "FPGA routing: ")
             with dpg.group(horizontal=True):
                 dpg.add_text(hw_justified_strs["Baud rate: "])
-                dpg.add_combo('serial_baud', [9600, 14400, 19200, 38400, 57600, 115200],
+                dpg.add_combo([9600, 14400, 19200, 38400, 57600, 115200], tag='serial_baud',
                                 default_value=115200)
                 with dpg.group(horizontal=True):
                     dpg.add_text(hw_justified_strs["MCU read timeout: "])
-                    dpg.add_input_float('mcu_read_timeout', min_value=1.0, min_clamped=True, default_value=1.1,
+                    dpg.add_input_float(tag='mcu_read_timeout', min_value=1.0, min_clamped=True, default_value=1.1,
                                         step=0.1)
 
             dpg.add_separator()
 
             with dpg.group(horizontal=True):
                 dpg.add_text(hw_justified_strs["FPGA routing: "])
-                dpg.add_radio_button('routing', ["MOORE", "NEWSE"], default_value="MOORE",
+                dpg.add_radio_button(tag='routing', items=["MOORE", "NEWSE"], default_value="MOORE",
                                         horizontal=True)
             
             dpg.add_text("Accessed columns: ")
